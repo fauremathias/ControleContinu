@@ -6,15 +6,18 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 
+@Suppress("UNCHECKED_CAST")
 class MainRepository {
     fun getStoredTodos(context: Context): ArrayList<Todo>{
         val preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
         val todosStr = preferences.getString("todos", "")
         val gson = Gson()
         val type: Type = object : TypeToken<ArrayList<Todo?>?>() {}.type
-        try {
-            return gson.fromJson<Any>(todosStr, type) as ArrayList<Todo>
-        } catch (e: NullPointerException) { return ArrayList<Todo>() }
+        return try {
+            gson.fromJson<Any>(todosStr, type) as ArrayList<Todo>
+        } catch (e: NullPointerException) {
+            ArrayList()
+        }
     }
 
     fun saveTodo(context: Context, todo: Todo) {
@@ -53,9 +56,8 @@ class MainRepository {
         val todosStr = preferences.getString("todos", "")
         val gson = Gson()
         val type: Type = object : TypeToken<ArrayList<Todo?>?>() {}.type
-        var todos = ArrayList<Todo>()
         try {
-            todos = gson.fromJson<Any>(todosStr, type) as ArrayList<Todo>
+            val todos = gson.fromJson<Any>(todosStr, type) as ArrayList<Todo>
             todos.remove(todo)
             editor.putString("todos", gson.toJson(todos))
             editor.apply()

@@ -5,7 +5,7 @@ import com.controlecontinu.data.Todo
 import com.controlecontinu.domain.MainRepository
 
 class MainViewModel {
-    val repository = MainRepository()
+    private val repository = MainRepository()
     lateinit var listener: IRefreshTodoListener
 
     fun getStoredTodos(context: Context): ArrayList<Todo> {
@@ -21,7 +21,6 @@ class MainViewModel {
         repository.deleteTodo(context, todo)
         listener.refreshTodos(repository.getStoredTodos(context))
     }
-
 
     fun changeTodo(context: Context, todo: Todo, index: Int) {
         repository.changeTodo(context, todo, index)
