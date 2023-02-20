@@ -51,9 +51,20 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener{
             setTitle("Add task")
             setPositiveButton("Add") { _, _ ->
                 try {
-                    val todo = viewModel.createTodo(editText.text.toString())
-                    viewModel.saveTodo(this@MainActivity, todo)
-                    adapter.notifyDataSetChanged()
+                    var isValid = true
+
+                    if ( editText.text.toString().isEmpty() ) {
+                        isValid = false
+                        Toast.makeText(this@MainActivity, "empty", Toast.LENGTH_SHORT).show()
+                    }
+
+                    if ( isValid ) {
+                        val todo = viewModel.createTodo(editText.text.toString())
+                        viewModel.saveTodo(this@MainActivity, todo)
+                        adapter.notifyDataSetChanged()
+                    }
+
+
                 } catch (e: java.lang.Exception) {
                     Toast.makeText(this@MainActivity, "Failed task", Toast.LENGTH_SHORT).show()
                 }
