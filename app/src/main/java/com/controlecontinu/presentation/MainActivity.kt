@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.View.INVISIBLE
-import android.view.View.VISIBLE
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -50,14 +48,14 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener{
 
     }
 
-    fun showImg() {
+    private fun showImg() {
         if (data.isEmpty()){
-            imageVide.visibility = VISIBLE
-            textTitle.visibility = VISIBLE
+            imageVide.visibility = View.VISIBLE
+            textTitle.visibility = View.VISIBLE
         }
         else {
-            imageVide.visibility = INVISIBLE
-            textTitle.visibility = INVISIBLE
+            imageVide.visibility = View.INVISIBLE
+            textTitle.visibility = View.INVISIBLE
         }
     }
 

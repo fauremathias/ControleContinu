@@ -4,4 +4,5 @@
     <string name="write_your_task">Write your task</string>
     <string name="supprimertache">supprimertache</string>
     <string name="lorsque_liste_vide">Lorsque liste vide</string>
+    <string name="bienvenue_sur_la_todoglist">Bienvenue sur la ToDogList</string>
 </resources>

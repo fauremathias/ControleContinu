@@ -11,9 +11,7 @@ class MainRepository {
     fun getStoredTodos(context: Context): ArrayList<Todo>{
         val preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
         val todosStr = preferences.getString("todos", "")
-        //preferences.edit().clear().apply();
         val gson = Gson()
-
         val type: Type = object : TypeToken<ArrayList<Todo?>?>() {}.type
         return try {
             gson.fromJson<Any>(todosStr, type) as ArrayList<Todo>
