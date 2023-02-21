@@ -28,18 +28,19 @@ class TodoAdapter (
     }
 
     override fun onBindViewHolder(holder: ViewHolder,  position: Int) {
-        val itemPosition = holder.adapterPosition
-        val item = data[itemPosition]
+        var item = data[position]
         holder.taskText.setText(item.task)
         holder.finishCheckBox.isChecked = item.finish
 
         holder.finishCheckBox.setOnClickListener {
+            item = data[holder.adapterPosition]
             item.finish = holder.finishCheckBox.isChecked
             listener.changeTodo(item, holder.adapterPosition)
         }
 
         holder.taskText.addTextChangedListener(object:TextWatcher{
             override fun afterTextChanged(s: Editable?) {
+                item = data[holder.adapterPosition]
                 item.task = holder.taskText.text.toString()
                 listener.changeTodo(item, holder.adapterPosition)
             }
@@ -49,10 +50,6 @@ class TodoAdapter (
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
         })
-
-
-
-
 
         holder.deleteButton.setOnClickListener{
             listener.deleteTodo(item)

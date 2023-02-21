@@ -55,6 +55,7 @@ class MainRepository {
         try {
             val todos = gson.fromJson<Any>(todosStr, type) as ArrayList<Todo>
             todos.remove(todo)
+            //editor.clear().apply();
             editor.putString("todos", gson.toJson(todos))
             editor.apply()
         } catch (e: NullPointerException) { e.printStackTrace() }
