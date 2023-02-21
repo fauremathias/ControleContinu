@@ -11,7 +11,9 @@ class MainRepository {
     fun getStoredTodos(context: Context): ArrayList<Todo>{
         val preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
         val todosStr = preferences.getString("todos", "")
+        //preferences.edit().clear().apply();
         val gson = Gson()
+
         val type: Type = object : TypeToken<ArrayList<Todo?>?>() {}.type
         return try {
             gson.fromJson<Any>(todosStr, type) as ArrayList<Todo>
@@ -23,15 +25,9 @@ class MainRepository {
     fun saveTodo(context: Context, todo: Todo) {
         val preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE)
         val editor = preferences.edit()
-        val todosStr = preferences.getString("todos", "")
-        val gson = Gson()
-        val type: Type = object : TypeToken<ArrayList<Todo?>?>() {}.type
-        var todos = ArrayList<Todo>()
-        try {
-            todos = gson.fromJson<Any>(todosStr, type) as ArrayList<Todo>
-        } catch (e: NullPointerException) { e.printStackTrace() }
+        val todos = getStoredTodos(context)
         todos.add(todo)
-        editor.putString("todos", gson.toJson(todos))
+        editor.putString("todos", Gson().toJson(todos))
         editor.apply()
     }
 

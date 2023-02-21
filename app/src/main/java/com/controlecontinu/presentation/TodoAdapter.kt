@@ -1,6 +1,5 @@
 package com.controlecontinu.presentation
 
-import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -27,21 +26,22 @@ class TodoAdapter (
     override fun getItemCount(): Int {
         return data.size
     }
-    @SuppressLint("RecyclerView")
+
     override fun onBindViewHolder(holder: ViewHolder,  position: Int) {
-        val item = data[position]
+        val itemPosition = holder.adapterPosition
+        val item = data[itemPosition]
         holder.taskText.setText(item.task)
         holder.finishCheckBox.isChecked = item.finish
 
         holder.finishCheckBox.setOnClickListener {
             item.finish = holder.finishCheckBox.isChecked
-            listener.changeTodo(item, position)
+            listener.changeTodo(item, holder.adapterPosition)
         }
 
         holder.taskText.addTextChangedListener(object:TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 item.task = holder.taskText.text.toString()
-                listener.changeTodo(item, position)
+                listener.changeTodo(item, holder.adapterPosition)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
