@@ -8,6 +8,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener{
     private lateinit var adapter: TodoAdapter
     private var viewModel = MainViewModel()
     private lateinit var imageVide: ImageView
+    private lateinit var textTitle: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,7 +35,9 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener{
         recycler = findViewById(R.id.recycler_list)
         recycler.layoutManager = LinearLayoutManager(this)
         imageVide = findViewById(R.id.imageVide)
+        textTitle = findViewById(R.id.textTitle)
         showImg()
+
 
         adapter = TodoAdapter(data)
         adapter.listener = this
@@ -49,9 +53,11 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener{
     fun showImg() {
         if (data.isEmpty()){
             imageVide.visibility = VISIBLE
+            textTitle.visibility = VISIBLE
         }
         else {
             imageVide.visibility = INVISIBLE
+            textTitle.visibility = INVISIBLE
         }
     }
 
