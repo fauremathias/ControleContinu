@@ -3,4 +3,5 @@
     <string name="ajouter_une_tache">Ajouter une tache</string>
     <string name="write_your_task">Write your task</string>
     <string name="supprimertache">supprimertache</string>
+    <string name="lorsque_liste_vide">Lorsque liste vide</string>
 </resources>

@@ -3,7 +3,11 @@ package com.controlecontinu.presentation
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,16 +22,18 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener{
     private lateinit var data: ArrayList<Todo>
     private lateinit var adapter: TodoAdapter
     private var viewModel = MainViewModel()
+    private lateinit var imageVide: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         viewModel.listener = this
         data = viewModel.getStoredTodos(this)
-
         addButton = findViewById(R.id.add_button)
         recycler = findViewById(R.id.recycler_list)
         recycler.layoutManager = LinearLayoutManager(this)
+        imageVide = findViewById(R.id.imageVide)
+        showImg()
 
         adapter = TodoAdapter(data)
         adapter.listener = this
@@ -38,8 +44,18 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener{
             showAddTaskDialog()
         }
 
-
     }
+
+    fun showImg() {
+        if (data.isEmpty()){
+            imageVide.visibility = VISIBLE
+        }
+        else {
+            imageVide.visibility = INVISIBLE
+        }
+    }
+
+
     @SuppressLint("InflateParams", "NotifyDataSetChanged")
     fun showAddTaskDialog() {
         val builder = AlertDialog.Builder(this)
@@ -89,6 +105,7 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener{
     override fun refreshTodos(data: List<Todo>) {
         this.data.clear()
         this.data.addAll(data)
+        showImg()
         this.adapter.notifyDataSetChanged()
     }
 }
