@@ -16,4 +16,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:autofillHints="" />
+
+    <!--<DatePicker
+        android:id="@+id/date_Picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:datePickerMode = "spinner"
+        android:calendarViewShown="false"/>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

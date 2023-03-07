@@ -4,16 +4,15 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.controlecontinu.R
 import com.controlecontinu.data.Todo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener {
 
@@ -25,10 +24,24 @@ class MainActivity : AppCompatActivity(), ITodoListener, IRefreshTodoListener {
     private var viewModel = MainViewModel()
     private lateinit var imageVide: ImageView
     private lateinit var textTitle: TextView
+    //private lateinit var datePicker: DatePicker
 
     // Méthode onCreate appelée à la création de l'activité
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        /*val datePicker = findViewById<DatePicker>(R.id.date_Picker)
+        val today = Calendar.getInstance()
+        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+
+        ) { view, year, month, day ->
+            val month = month + 1
+            val msg = "You Selected: $day/$month/$year"
+            Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
+        }*/
+
 
         // Définition du layout pour l'activité
         setContentView(R.layout.activity_main)
