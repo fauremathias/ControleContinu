@@ -7,7 +7,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="TodoList"
+        android:label="TodogList"
         android:supportsRtl="true"
         android:theme="@style/Theme.ControleContinu"
         tools:targetApi="31">
